@@ -404,7 +404,6 @@ class _DisplaySettingsSheetState extends ConsumerState<DisplaySettingsSheet> {
 
                     // ========== 批处理编辑器悬浮下翻页按钮 ==========
                     _paramCard(
-                      icon: Icons.keyboard_arrow_down,
                       title: '批处理编辑器悬浮下翻页按钮',
                       subtitle: '空心方框 · 文本/行/行编辑器3 共用',
                       child: Column(
@@ -440,7 +439,6 @@ class _DisplaySettingsSheetState extends ConsumerState<DisplaySettingsSheet> {
 
                     // ========== 批处理编辑器悬浮上翻页按钮 ==========
                     _paramCard(
-                      icon: Icons.keyboard_arrow_up,
                       title: '批处理编辑器悬浮上翻页按钮',
                       subtitle: '空心方框 · 文本/行/行编辑器3 共用',
                       child: Column(
@@ -476,7 +474,6 @@ class _DisplaySettingsSheetState extends ConsumerState<DisplaySettingsSheet> {
 
                     // ========== 悬浮下翻页按钮 ==========
                     _paramCard(
-                      icon: Icons.arrow_forward_ios,
                       title: '悬浮下翻页按钮',
                       subtitle: '空心正方形框 · 点击向下翻一屏',
                       child: Column(
@@ -512,7 +509,6 @@ class _DisplaySettingsSheetState extends ConsumerState<DisplaySettingsSheet> {
 
                     // ========== 悬浮上翻页按钮 ==========
                     _paramCard(
-                      icon: Icons.arrow_back_ios,
                       title: '悬浮上翻页按钮',
                       subtitle: '空心正方形框 · 点击向上翻一屏',
                       child: Column(
@@ -586,7 +582,7 @@ class _DisplaySettingsSheetState extends ConsumerState<DisplaySettingsSheet> {
                     // ========== 跨行块视图专属颜色 ==========
                     if (ref.watch(viewModeProvider) == ViewMode.grouped)
                       _paramCard(
-                        icon: Icons.view_agenda,
+                        icon: Icons.palette,
                         title: '跨行块视图专属颜色',
                         subtitle: '仅跨行块视图生效',
                         child: Column(
@@ -620,7 +616,7 @@ class _DisplaySettingsSheetState extends ConsumerState<DisplaySettingsSheet> {
   ///
   /// [icon] + [title] 组成卡片 header；[subtitle] 可选，在 header 下方。
   Widget _paramCard({
-    required IconData icon,
+    IconData? icon,
     required String title,
     String? subtitle,
     required Widget child,
@@ -651,16 +647,18 @@ class _DisplaySettingsSheetState extends ConsumerState<DisplaySettingsSheet> {
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
             child: Row(
               children: [
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    shape: BoxShape.circle,
+                if (icon != null) ...[
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(icon, size: 18, color: Colors.grey.shade700),
                   ),
-                  child: Icon(icon, size: 18, color: Colors.grey.shade700),
-                ),
-                const SizedBox(width: 10),
+                  const SizedBox(width: 10),
+                ],
                 Expanded(
                   child: Text(
                     title,
