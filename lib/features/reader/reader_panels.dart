@@ -397,7 +397,6 @@ Padding(
                     
                     if (s.showTopButton)
                       _btnParamCard(
-                        icon: Icons.keyboard_arrow_up,
                         title: '上一文件按钮',
                         style: s.topBtnStyle,
                         child: Column(
@@ -484,7 +483,6 @@ Padding(
 
                     if (s.showBottomButton)
                       _btnParamCard(
-                        icon: Icons.keyboard_arrow_down,
                         title: '下一文件按钮',
                         style: s.bottomBtnStyle,
                         child: Column(
@@ -572,7 +570,6 @@ Padding(
 
                     if (s.showDelButton)
                       _btnParamCard(
-                        icon: Icons.delete_outline,
                         title: '删除文件按钮',
                         style: s.delBtnStyle,
                         child: Column(
@@ -659,7 +656,6 @@ Padding(
 
                     if (s.showMoveButton)
                       _btnParamCard(
-                        icon: Icons.drag_indicator,
                         title: '移动文件按钮',
                         style: s.moveBtnStyle,
                         child: Column(
@@ -892,7 +888,7 @@ Padding(
   /// [icon] 是 header 左侧的小图标；[title] 是按钮名称；
   /// [style] 是当前样式（0=实心圆, 1=圆环），会在 header 右侧显示标签。
   Widget _btnParamCard({
-    required IconData icon,
+    IconData? icon,
     required String title,
     required int style,
     required Widget child,
@@ -925,20 +921,22 @@ Padding(
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
             child: Row(
               children: [
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    shape: BoxShape.circle,
+                if (icon != null) ...[
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      icon,
+                      size: 18,
+                      color: Colors.grey.shade700,
+                    ),
                   ),
-                  child: Icon(
-                    icon,
-                    size: 18,
-                    color: Colors.grey.shade700,
-                  ),
-                ),
-                const SizedBox(width: 10),
+                  const SizedBox(width: 10),
+                ],
                 Expanded(
                   child: Text(
                     title,
